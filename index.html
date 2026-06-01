@@ -12,19 +12,15 @@
 
 <style>
 
-*{
+html,body{
 margin:0;
 padding:0;
-box-sizing:border-box;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
+width:100%;
+min-height:100%;
+overflow-x:hidden;
 font-family:'Fredoka',sans-serif;
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
 #ffd6ea,
 #ffb0d9,
@@ -32,8 +28,10 @@ background:linear-gradient(
 #ff69b4,
 #ff1493
 );
+background-attachment:fixed;
+background-size:cover;
+background-repeat:no-repeat;
 color:white;
-overflow-x:hidden;
 }
 
 /* PAGE */
@@ -47,7 +45,7 @@ align-items:center;
 flex-direction:column;
 text-align:center;
 position:relative;
-animation:fade 1s ease;
+animation:fade .8s ease;
 }
 
 .page.active{
@@ -94,6 +92,7 @@ border-radius:25px;
 margin:20px 0;
 box-shadow:0 0 30px rgba(255,255,255,.35);
 animation:floating 4s ease-in-out infinite;
+object-fit:cover;
 }
 
 @keyframes floating{
@@ -194,6 +193,8 @@ transform:translateY(-120vh);
 }
 }
 
+/* MOBILE */
+
 @media(max-width:768px){
 
 .page{
@@ -202,6 +203,10 @@ padding:30px 18px;
 
 p{
 font-size:.96rem;
+}
+
+.card img{
+height:250px;
 }
 
 }
@@ -217,7 +222,7 @@ font-size:.96rem;
 <source src="assets/music/takut-idgitaf.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE WELCOME -->
+<!-- WELCOME -->
 
 <div class="page active" id="welcome">
 
@@ -227,7 +232,8 @@ font-size:.96rem;
 
 <p>
 Halo sayangku, website kecil ini aku buat khusus untuk kamu.
-Di dalamnya ada beberapa cerita, kenangan, dan hal-hal yang ingin aku sampaikan
+Di dalamnya ada beberapa cerita, kenangan,
+dan hal-hal yang ingin aku sampaikan
 untuk perempuan paling spesial di hidupku.
 </p>
 
@@ -292,8 +298,12 @@ Mulai Perjalanan Kita 💖
 <div class="box">
 
 <p>
-Dari awal kenal sampai sekarang, semuanya terasa begitu indah.
-Kita pernah ketawa bareng, sedih bareng, marahan, saling memahami,
+Dari awal kenal sampai sekarang,
+semuanya terasa begitu indah.
+Kita pernah ketawa bareng,
+sedih bareng,
+marahan,
+saling memahami,
 dan tetap memilih bertahan.
 Aku bersyukur banget karena dipertemukan sama kamu.
 </p>
@@ -325,7 +335,8 @@ Aku suka semua tentang kita.
 Cara kita bercanda,
 cara kamu marah lucu,
 cara kita saling ngangenin,
-dan semua hal kecil yang selalu berhasil bikin aku bahagia.
+dan semua hal kecil
+yang selalu berhasil bikin aku bahagia.
 </p>
 
 </div>
@@ -383,7 +394,9 @@ Aku Sudah Membacanya ❤️
 Selamat ulang tahun yang ke-20 tahun, sayangku.
 Terima kasih sudah hadir dan mewarnai hidupku.
 Semoga setiap langkahmu selalu dipenuhi kebahagiaan,
-kesehatan, keberuntungan, dan cinta yang tidak pernah habis.
+kesehatan,
+keberuntungan,
+dan cinta yang tidak pernah habis.
 </p>
 
 <br>
@@ -474,8 +487,6 @@ p.classList.remove('active');
 });
 
 document.getElementById(id).classList.add('active');
-
-/* CONFETTI */
 
 if(id==='birthday'){
 
