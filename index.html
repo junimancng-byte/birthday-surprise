@@ -1,0 +1,719 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Birthday My Love ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:
+linear-gradient(135deg,#ffd6ea,#ffb7dc,#ff91ca,#ff69b4,#ff1493);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+.page{
+display:none;
+min-height:100vh;
+padding:40px 20px;
+justify-content:center;
+align-items:center;
+position:relative;
+animation:fade 1s ease;
+}
+
+.page.active{
+display:flex;
+}
+
+.container{
+max-width:950px;
+width:100%;
+text-align:center;
+z-index:2;
+}
+
+h1{
+font-family:'Pacifico',cursive;
+font-size:clamp(2.2rem,5vw,4.5rem);
+margin-bottom:20px;
+text-shadow:0 0 20px rgba(255,255,255,.5);
+}
+
+h2{
+font-size:1.5rem;
+}
+
+h3{
+font-weight:400;
+margin-bottom:30px;
+}
+
+p{
+line-height:1.9;
+margin-bottom:20px;
+font-size:1.05rem;
+}
+
+.main-photo,
+.story-photo,
+.ending-photo{
+width:100%;
+max-width:350px;
+border-radius:30px;
+margin-bottom:25px;
+border:4px solid rgba(255,255,255,.3);
+box-shadow:0 10px 40px rgba(255,255,255,.35);
+animation:floatingPhoto 4s ease-in-out infinite;
+}
+
+button{
+border:none;
+padding:16px 30px;
+border-radius:999px;
+background:white;
+color:#ff1493;
+font-weight:700;
+font-size:1rem;
+cursor:pointer;
+transition:.35s;
+margin-top:15px;
+box-shadow:0 8px 25px rgba(255,255,255,.3);
+}
+
+button:hover{
+transform:translateY(-5px) scale(1.05);
+box-shadow:0 0 30px rgba(255,255,255,.9);
+}
+
+.card-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.memory-card{
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(10px);
+border:2px solid rgba(255,255,255,.2);
+border-radius:30px;
+overflow:hidden;
+cursor:pointer;
+transition:.4s;
+position:relative;
+}
+
+.memory-card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 35px rgba(255,255,255,.5);
+}
+
+.memory-card::after{
+content:'💖';
+position:absolute;
+top:15px;
+right:15px;
+font-size:1.4rem;
+animation:pulse 2s infinite;
+}
+
+.memory-card img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+.memory-card h2{
+padding:20px;
+}
+
+.reveal{
+opacity:0;
+transform:translateY(50px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.hearts span{
+position:fixed;
+bottom:-50px;
+font-size:20px;
+animation:floatHeart linear infinite;
+opacity:.7;
+pointer-events:none;
+}
+
+.sparkle{
+position:fixed;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+animation:sparkle 2s infinite;
+pointer-events:none;
+}
+
+.music-controls{
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+margin:30px 0;
+}
+
+.long-message{
+background:rgba(255,255,255,.12);
+padding:30px;
+border-radius:30px;
+backdrop-filter:blur(12px);
+margin-top:25px;
+}
+
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.popup-content{
+background:linear-gradient(135deg,#ff8ec8,#ff1493);
+padding:40px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 0 40px rgba(255,255,255,.5);
+animation:bounce .8s;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.2)}
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-15px)}
+}
+
+@keyframes floatingPhoto{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
+
+@keyframes floatHeart{
+0%{
+transform:translateY(0);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+@keyframes sparkle{
+0%,100%{
+opacity:.2;
+transform:scale(.5);
+}
+50%{
+opacity:1;
+transform:scale(1.5);
+}
+}
+
+@media(max-width:768px){
+
+.page{
+padding:30px 18px;
+}
+
+p{
+font-size:.97rem;
+}
+
+.long-message{
+padding:22px;
+}
+
+}
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<audio id="bgMusic" loop>
+<source src="assets/music/takut-idgitaf.mp3" type="audio/mp3">
+</audio>
+
+<section class="page active" id="welcome">
+
+<div class="container">
+
+<img src="assets/images/welcome.jpg" class="main-photo">
+
+<h1>Happy Birthday My Love ❤️</h1>
+
+<p>
+Halo sayangku, website kecil ini aku buat khusus untuk kamu.
+Di dalamnya ada beberapa cerita, kenangan, dan hal-hal yang ingin aku sampaikan
+untuk wanita yang sangat berarti dalam hidupku.
+</p>
+
+<button onclick="showPage('menu')">
+Mulai Perjalanan Kita 💖
+</button>
+
+</div>
+
+</section>
+
+<section class="page" id="menu">
+
+<div class="container">
+
+<h1>Kenangan Kita 💕</h1>
+
+<div class="card-container">
+
+<div class="memory-card" onclick="showPage('perjalanan')">
+<img src="assets/images/perjalanan.jpg">
+<h2>Perjalanan Kita ❤️</h2>
+</div>
+
+<div class="memory-card" onclick="showPage('tentang')">
+<img src="assets/images/tentang.jpg">
+<h2>Tentang Kita 💗</h2>
+</div>
+
+<div class="memory-card" onclick="showPage('doa')">
+<img src="assets/images/doa.jpg">
+<h2>Harapan dan Doa Untuk Kamu 💖</h2>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="page" id="perjalanan">
+<div class="container">
+
+<img src="assets/images/perjalanan.jpg" class="story-photo">
+
+<h1>Perjalanan Kita ❤️</h1>
+
+<div class="reveal">
+<p>
+Aku masih ingat bagaimana semuanya dimulai.
+Dari dua orang asing yang perlahan saling mengenal,
+hingga akhirnya menjadi dua hati yang saling menemukan rumah.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Ada begitu banyak tawa, cerita random, momen kecil,
+dan perhatian sederhana yang tanpa sadar membuat hubungan kita terasa sangat spesial.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Kita pernah melewati hari-hari sulit,
+tapi aku bangga karena kita tetap memilih bertahan dan saling menjaga.
+</p>
+</div>
+
+<button onclick="finishStory('perjalanan')">
+Aku Sudah Membacanya ❤️
+</button>
+
+</div>
+</section>
+
+<section class="page" id="tentang">
+<div class="container">
+
+<img src="assets/images/tentang.jpg" class="story-photo">
+
+<h1>Tentang Kita 💕</h1>
+
+<div class="reveal">
+<p>
+Yang membuat hubungan kita spesial adalah cara kita selalu menemukan bahagia
+dari hal-hal kecil yang sederhana.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Aku suka cara kamu tertawa, cara kamu manja,
+cara kamu peduli, bahkan cara kamu ngambek lucu.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Kamu bukan cuma seseorang yang aku cintai,
+tapi juga rumah ternyaman yang pernah aku temukan.
+</p>
+</div>
+
+<button onclick="finishStory('tentang')">
+Aku Sudah Membacanya ❤️
+</button>
+
+</div>
+</section>
+
+<section class="page" id="doa">
+<div class="container">
+
+<img src="assets/images/doa.jpg" class="story-photo">
+
+<h1>Harapan dan Doa Untuk Kamu 💖</h1>
+
+<div class="reveal">
+<p>
+Aku selalu berdoa semoga kamu diberi kesehatan,
+kebahagiaan, dan umur yang panjang penuh keberkahan.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Semoga semua impianmu satu per satu bisa tercapai,
+dan semoga langkahmu selalu dipenuhi hal-hal baik.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Aku juga berharap hubungan kita terus tumbuh,
+lebih dewasa, lebih kuat, dan selalu dipenuhi cinta yang tulus.
+</p>
+</div>
+
+<button onclick="finishStory('doa')">
+Aku Sudah Membacanya ❤️
+</button>
+
+</div>
+</section>
+
+<section class="page" id="birthday">
+<div class="container">
+
+<h1>
+Selamat Ulang Tahun Ke-20,
+Wanita Kesayanganku ❤️
+</h1>
+
+<h3>
+Hari ini dunia menjadi lebih indah karena seseorang yang sangat spesial sedang bertambah usia.
+</h3>
+
+<div class="long-message reveal">
+
+<p>
+Selamat ulang tahun, sayangku.
+Terima kasih karena sudah hadir dan menjadi bagian paling indah dalam hidupku.
+</p>
+
+<p>
+Aku bersyukur bisa mengenalmu, mencintaimu,
+dan memiliki banyak kenangan indah bersamamu.
+</p>
+
+<p>
+Semoga tahun ini menjadi tahun terbaikmu.
+Semoga kamu selalu sehat,
+selalu bahagia,
+dan selalu dikelilingi cinta yang tulus.
+</p>
+
+<p>
+Semoga semua cita-citamu tercapai,
+semoga semua langkahmu dipenuhi keberuntungan,
+dan semoga kamu selalu kuat menghadapi semua hal.
+</p>
+
+<p>
+Selamat ulang tahun yang ke-20 tahun, sayangku.
+Terima kasih sudah hadir dan mewarnai hidupku.
+Semoga setiap langkahmu selalu dipenuhi kebahagiaan,
+kesehatan, keberuntungan, dan cinta yang tidak pernah habis.
+</p>
+
+<p>
+Aku sayang kamu hari ini, besok, dan seterusnya ❤️
+</p>
+
+</div>
+
+<div class="music-controls">
+<button onclick="playMusic()">▶ Putar Musik</button>
+<button onclick="pauseMusic()">⏸ Pause Musik</button>
+</div>
+
+<button onclick="showPage('ending')">
+Lihat Pesan Terakhir Untukmu 💌
+</button>
+
+</div>
+</section>
+
+<section class="page" id="ending">
+<div class="container">
+
+<h1>Forever With You ❤️</h1>
+
+<div class="reveal">
+<p>
+Terima kasih sudah menjadi bagian terindah dalam hidupku.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Aku mungkin tidak selalu sempurna,
+tetapi aku akan selalu berusaha memberikan yang terbaik untukmu.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Aku berharap kita masih bisa merayakan banyak ulang tahun bersama di masa depan.
+</p>
+</div>
+
+<div class="reveal">
+<p>
+Aku sayang kamu,
+hari ini,
+besok,
+dan seterusnya ❤️
+</p>
+</div>
+
+<img src="assets/images/ending.jpg" class="ending-photo">
+
+<button onclick="virtualHug()">
+Peluk Virtual 🤗
+</button>
+
+</div>
+</section>
+
+<div class="popup" id="popup">
+<div class="popup-content">
+<h1>Aku Sayang Kamu ❤️</h1>
+<button onclick="closePopup()">Tutup 💖</button>
+</div>
+</div>
+
+<script>
+const pages = document.querySelectorAll('.page');
+
+function showPage(id){
+
+pages.forEach(p=>p.classList.remove('active'));
+
+document.getElementById(id).classList.add('active');
+
+window.scrollTo(0,0);
+
+launchConfetti();
+
+if(id === 'birthday'){
+playMusic();
+massiveHearts();
+}
+
+}
+
+const progress = {
+perjalanan:false,
+tentang:false,
+doa:false
+};
+
+function finishStory(name){
+
+progress[name] = true;
+
+localStorage.setItem('birthdayProgress',JSON.stringify(progress));
+
+checkProgress();
+
+alert('Halaman berhasil dibaca ❤️');
+
+showPage('menu');
+
+}
+
+function checkProgress(){
+
+if(
+progress.perjalanan &&
+progress.tentang &&
+progress.doa
+){
+
+setTimeout(()=>{
+showPage('birthday');
+},800);
+
+}
+
+}
+
+function launchConfetti(){
+
+confetti({
+particleCount:180,
+spread:120,
+origin:{y:.6}
+});
+
+}
+
+function playMusic(){
+document.getElementById('bgMusic').play();
+}
+
+function pauseMusic(){
+document.getElementById('bgMusic').pause();
+}
+
+function virtualHug(){
+
+massiveHearts();
+
+launchConfetti();
+
+document.getElementById('popup').style.display='flex';
+
+}
+
+function closePopup(){
+document.getElementById('popup').style.display='none';
+}
+
+function massiveHearts(){
+
+for(let i=0;i<25;i++){
+
+const heart = document.createElement('span');
+
+heart.innerHTML = ['💖','💕','❤️','💗'][Math.floor(Math.random()*4)];
+
+heart.style.left = Math.random()*100+'vw';
+heart.style.animationDuration = (5 + Math.random()*5)+'s';
+heart.style.fontSize = (20 + Math.random()*30)+'px';
+
+document.getElementById('hearts').appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},10000);
+
+}
+
+}
+
+function createSparkles(){
+
+for(let i=0;i<40;i++){
+
+const sparkle = document.createElement('div');
+
+sparkle.classList.add('sparkle');
+
+sparkle.style.left = Math.random()*100+'vw';
+sparkle.style.top = Math.random()*100+'vh';
+
+sparkle.style.animationDuration = (1+Math.random()*3)+'s';
+
+document.body.appendChild(sparkle);
+
+}
+
+}
+
+createSparkles();
+
+window.addEventListener('scroll',()=>{
+
+document.querySelectorAll('.reveal').forEach(el=>{
+
+const top = el.getBoundingClientRect().top;
+
+if(top < window.innerHeight - 100){
+el.classList.add('active');
+}
+
+});
+
+});
+
+window.dispatchEvent(new Event('scroll'));
+
+window.onload = ()=>{
+
+const saved = JSON.parse(localStorage.getItem('birthdayProgress'));
+
+if(saved){
+
+progress.perjalanan = saved.perjalanan;
+progress.tentang = saved.tentang;
+progress.doa = saved.doa;
+
+checkProgress();
+
+}
+
+massiveHearts();
+
+};
+</script>
+
+</body>
+</html>
